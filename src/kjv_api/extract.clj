@@ -5,8 +5,8 @@
   [verse]
   (clojure.string/replace 
     (re-find #"\{\d+:\d+\}" verse)
-	#"\{|\}"
-	""))
+    #"\{|\}"
+    ""))
 
 (defn- clean-verse-numbers [verse]
   (clojure.string/replace verse #"\{\d+:\d+\}\s" ""))
@@ -16,15 +16,15 @@
 
 (defn- split-verses [book-content]
   (clojure.string/split
-	(clojure.string/replace book-content #"[^$]\{" ";{")
-	#";"))
+    (clojure.string/replace book-content #"[^$]\{" ";{")
+    #";"))
 
 (defn extract-verses
   [verses book-content]
   (clojure.string/join " "
-	(map clean-verse-numbers
-	  (take-while #(verse-leq? (verse-number %) (:end verses (:start verses))) 
-		(drop-while #(not (= (verse-number %) (:start verses))) 
-		  (split-verses book-content)))))) 
+  (map clean-verse-numbers
+    (take-while #(verse-leq? (verse-number %) (:end verses (:start verses))) 
+    (drop-while #(not (= (verse-number %) (:start verses))) 
+      (split-verses book-content)))))) 
 
 

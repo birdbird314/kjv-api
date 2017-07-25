@@ -13,7 +13,7 @@
 
   (testing "Should extract single verse"
     (is (= "verse 1" (extract-verses {:start "1:1"} book-content))))
-			
+      
   (testing "Should extract multiple verses"
     (is (= "verse 1 verse 2" (extract-verses {:start "1:1" :end "1:2"} book-content))))
 
