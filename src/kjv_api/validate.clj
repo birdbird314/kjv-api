@@ -9,34 +9,29 @@
   (str "Verse number format: " verse " is invalid. Valid example: \"2:10\""))
 
 (defn- get-wrong-book-message-or-nil [request books]
-  (if (some #(= % (:book request)) books)
-    nil
+  (if-not (some #(= % (:book request)) books)
     {:error (wrong-book-message (:book request))}))
 
-(defn- verse-is-valid? [verse] (re-matches #"\d+:\d+" verse)) 
+(defn- verse-format-is-valid? [verse] (re-matches #"\d+:\d+" verse)) 
 
 (defn- get-wrong-verse-message-or-nil [request]
   (merge-with #(str %1 "\n" %2)
-    (if (verse-is-valid? (:start request))
-      nil
+    (if-not (verse-format-is-valid? (:start request))
       {:error (wrong-verse-message (:start request))})
-  (if (or (verse-is-valid? (:end request)) (nil? (:end request)))
-      nil
+    (if-not (or (verse-format-is-valid? (:end request)) (nil? (:end request)))
       {:error (wrong-verse-message (:end request))})))
 
 (defn- get-out-of-order-verse-message-or-nil [request]
-  (if 
-    (and 
-      (verse-is-valid? (:start request))
-      (verse-is-valid? (:end request))
-    (< 0 (compare (:start request) (:end request))))
-  {:error (str "Start verse " (:start request) " is after end verse " (:end request))}
-  nil))
+  (if (and 
+        (verse-format-is-valid? (:start request))
+        (verse-format-is-valid? (:end request))
+        (< 0 (compare (:start request) (:end request))))
+    {:error (str "Start verse " (:start request) " is after end verse " (:end request))}))
       
 (defn get-error-message-fn [books] 
   (fn [request] 
     (merge-with #(str %1 "\n" %2)
-    (get-wrong-book-message-or-nil request books)
+      (get-wrong-book-message-or-nil request books)
       (get-wrong-verse-message-or-nil request)
       (get-out-of-order-verse-message-or-nil request))))
 
