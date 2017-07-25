@@ -20,7 +20,7 @@
     (if (verse-is-valid? (:start request))
       nil
       {:error (wrong-verse-message (:start request))})
-	(if (or (verse-is-valid? (:end request)) (nil? (:end request)))
+  (if (or (verse-is-valid? (:end request)) (nil? (:end request)))
       nil
       {:error (wrong-verse-message (:end request))})))
 
@@ -29,14 +29,14 @@
     (and 
       (verse-is-valid? (:start request))
       (verse-is-valid? (:end request))
-	  (< 0 (compare (:start request) (:end request))))
-	{:error (str "Start verse " (:start request) " is after end verse " (:end request))}
-	nil))
-    	
+    (< 0 (compare (:start request) (:end request))))
+  {:error (str "Start verse " (:start request) " is after end verse " (:end request))}
+  nil))
+      
 (defn get-error-message-fn [books] 
   (fn [request] 
     (merge-with #(str %1 "\n" %2)
-	  (get-wrong-book-message-or-nil request books)
+    (get-wrong-book-message-or-nil request books)
       (get-wrong-verse-message-or-nil request)
       (get-out-of-order-verse-message-or-nil request))))
 
