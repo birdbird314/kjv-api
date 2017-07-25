@@ -1,6 +1,6 @@
 (ns kjv-api.validate-test
   (:require [clojure.test :refer :all]
-            [kjv-api.validate :refer :all]))
+            [kjv-api.validate :refer [get-error-message-fn]]))
 
 (def books ["Mat"])
 
