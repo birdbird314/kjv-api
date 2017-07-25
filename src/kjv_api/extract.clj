@@ -22,9 +22,9 @@
 (defn extract-verses
   [verses book-content]
   (clojure.string/join " "
-  (map clean-verse-numbers
-    (take-while #(verse-leq? (verse-number %) (:end verses (:start verses))) 
-    (drop-while #(not (= (verse-number %) (:start verses))) 
-      (split-verses book-content)))))) 
+    (map clean-verse-numbers
+      (take-while #(verse-leq? (verse-number %) (:end verses (:start verses))) 
+        (drop-while #(not (= (verse-number %) (:start verses))) 
+          (split-verses book-content)))))) 
 
 
