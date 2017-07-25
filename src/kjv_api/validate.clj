@@ -39,3 +39,8 @@
 	  (get-wrong-book-message-or-nil request books)
       (get-wrong-verse-message-or-nil request)
       (get-out-of-order-verse-message-or-nil request))))
+
+(def get-error-message 
+  (get-error-message-fn 
+    (clojure.string/split (slurp "resources/books_list.txt") #"\s")))
+
