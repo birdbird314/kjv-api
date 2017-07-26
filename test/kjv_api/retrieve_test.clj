@@ -6,7 +6,7 @@
   [path]
   (cond
     (= "somePrefix/book_name.txt" path) "dummyBookContent"
-	:else ""))
+    :else ""))
 
 (def retrieve-book-content (retrieve-book-content-fn slurp-mock "somePrefix/"))
 

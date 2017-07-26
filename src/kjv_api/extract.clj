@@ -13,15 +13,14 @@
 
 (defn- clean-line-breaks [verse]
   (reduce
-    (fn 
-	  [v [regex replacement]] 
-	    (clojure.string/replace v regex replacement))
+    (fn [v [regex replacement]] 
+      (clojure.string/replace v regex replacement))
     verse
-     [[#"([^\r])\n([^\r])" "$1 $2"]
-     [#"([^\n])\r([^\n])" "$1 $2"]
-     [#"\r\n" " "]
-     [#"\n\r" " "]]))
-   
+    [[#"([^\r])\n([^\r])" "$1 $2"]
+    [#"([^\n])\r([^\n])" "$1 $2"]
+    [#"\r\n" " "]
+    [#"\n\r" " "]]))
+
 (defn- verse-leq? [v1 v2] 
   (<= (compare v1 v2) 0))
 

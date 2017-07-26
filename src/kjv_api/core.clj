@@ -1,9 +1,7 @@
 (ns kjv-api.core
   (:require [kjv-api.validate :refer [get-error-message]]
             [kjv-api.retrieve :refer [retrieve-book-content]]
-            [kjv-api.extract :refer [extract-verses]]
-  
-  ))
+            [kjv-api.extract :refer [extract-verses]]))
 
 (defn- verses-from [request] (select-keys request [:start :end]))
 
@@ -15,5 +13,5 @@
   [request]
   (if-let [error (get-error-message request)]
     error
-	{:passage (fetch-passage-from request)}))
+    {:passage (fetch-passage-from request)}))
 

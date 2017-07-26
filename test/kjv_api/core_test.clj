@@ -17,8 +17,8 @@
 
   (testing "Should return single verse properly"
     (let [result (process-request genesis-request)]
-	  (is (= {:passage genesis-first-verse} result)))) 
+      (is (= {:passage genesis-first-verse} result)))) 
 
   (testing "Should return multiple verses properly"
     (let [result (process-request john-request)]
-	  (is (= {:passage john-first-verses} result)))))  
+      (is (= {:passage john-first-verses} result)))))  
