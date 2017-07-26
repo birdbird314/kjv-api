@@ -18,13 +18,13 @@
   (merge-with #(str %1 "\n" %2)
     (if-not (verse-format-is-valid? (:start request))
       {:error (wrong-verse-message (:start request))})
-    (if-not (or (verse-format-is-valid? (:end request)) (nil? (:end request)))
+    (if-not (or (verse-format-is-valid? (:end request "")) (nil? (:end request)))
       {:error (wrong-verse-message (:end request))})))
 
 (defn- get-out-of-order-verse-message-or-nil [request]
   (if (and 
         (verse-format-is-valid? (:start request))
-        (verse-format-is-valid? (:end request))
+        (verse-format-is-valid? (:end request ""))
         (< 0 (compare (:start request) (:end request))))
     {:error (str "Start verse " (:start request) " is after end verse " (:end request))}))
       

@@ -25,7 +25,7 @@
   
   (testing "Should recognize invalid verse format"
     (assert-request->message 
-      {:book "Mat" :start "4%df" :end "1:2"}
+      {:book "Mat" :start "4%df"}
       {:error "Verse number format: 4%df is invalid. Valid example: \"2:10\""})
 
     (assert-request->message 
