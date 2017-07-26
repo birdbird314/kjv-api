@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [kjv-api.extract :refer :all]))
 
-(def book-content "{1:1} verse 1 {1:2} verse 2")
+(def book-content "SOME MESS*&(*{1:1} verse\r\n1 {1:2} verse\n2")
 
 (deftest extract-verses-test
   (testing "Should return empty string for empty sequence"
